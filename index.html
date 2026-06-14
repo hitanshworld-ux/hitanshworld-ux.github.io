@@ -678,6 +678,212 @@ footer .heart { color: var(--rose); }
   color: var(--muted);
 }
 
+
+/* ─── DAY/NIGHT INDICATOR ─── */
+.daynight-bar {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 18px;
+  border-radius: 16px;
+  font-size: 1rem; font-weight: 700;
+  margin-bottom: 10px;
+  transition: background 0.6s;
+}
+.daynight-bar.day  { background: linear-gradient(135deg,#fff9c4,#ffe082); color:#7a5500; }
+.daynight-bar.night{ background: linear-gradient(135deg,#1a1a3e,#2d2d6b); color:#c5cae9; }
+.dn-icon { font-size: 2.4rem; animation: spin 12s linear infinite; }
+.daynight-bar.night .dn-icon { animation: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── CONFETTI ─── */
+.confetti-piece {
+  position: fixed;
+  width: 10px; height: 10px;
+  top: -20px;
+  pointer-events: none;
+  z-index: 8000;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+.bday-banner {
+  background: linear-gradient(135deg,#ff6b8a,#ffb347,#cc5de8);
+  border-radius: 18px;
+  padding: 22px;
+  text-align: center;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.6;
+  box-shadow: 0 8px 28px rgba(255,107,138,0.35);
+}
+.bday-big { font-family:'Pacifico',cursive; font-size:2rem; display:block; margin-bottom:6px; }
+
+/* ─── LIGHTBOX ─── */
+#lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 5000;
+  padding: 20px;
+}
+#lightbox.open { display: flex; }
+#lightbox img {
+  max-width: 92vw; max-height: 88vh;
+  border-radius: 16px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+  animation: lbIn 0.3s ease;
+}
+@keyframes lbIn { from{transform:scale(0.85);opacity:0} to{transform:scale(1);opacity:1} }
+.lb-close {
+  position: absolute; top: 18px; right: 22px;
+  font-size: 2rem; color: #fff;
+  cursor: pointer; background: none; border: none;
+  line-height: 1;
+}
+.lb-nav {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  font-size: 2.2rem; color: #fff;
+  cursor: pointer; background: rgba(255,255,255,0.12);
+  border: none; border-radius: 50%;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.lb-nav:hover { background: rgba(255,255,255,0.25); }
+.lb-prev { left: 14px; }
+.lb-next { right: 14px; }
+.gallery-item { cursor: pointer; }
+
+/* ─── GUESTBOOK ─── */
+.gb-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.gb-input {
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color 0.2s;
+}
+.gb-input:focus { outline: none; border-color: var(--rose); }
+.gb-btn {
+  padding: 13px;
+  background: linear-gradient(135deg, var(--rose), var(--peach));
+  color: #fff; border: none; border-radius: 12px;
+  font-size: 1rem; font-weight: 800;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.gb-btn:hover { transform: scale(1.02); }
+.gb-entries { display: flex; flex-direction: column; gap: 12px; }
+.gb-entry {
+  background: linear-gradient(135deg, #fff5f8, #fff8f5);
+  border-left: 4px solid var(--rose);
+  border-radius: 0 14px 14px 0;
+  padding: 14px 16px;
+  animation: slideIn 0.3s ease;
+}
+[data-theme="dark"] .gb-entry { background: #351a10; }
+@keyframes slideIn { from{opacity:0;transform:translateX(-10px)} to{opacity:1;transform:none} }
+.gb-name { font-weight: 800; font-size: 0.9rem; color: var(--rose); }
+.gb-time { font-size: 0.72rem; color: var(--muted); margin-left: 8px; }
+.gb-msg  { margin-top: 5px; font-size: 0.93rem; }
+.gb-empty { text-align:center; color:var(--muted); padding:20px; font-size:0.9rem; }
+
+/* ─── PLAYLIST ─── */
+.playlist-wrap { display: flex; flex-direction: column; gap: 10px; }
+.pl-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 16px;
+  border-radius: 13px;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  user-select: none;
+}
+.pl-item:hover { transform: translateX(4px); }
+.pl-item.playing {
+  background: linear-gradient(135deg, #fff0f4, #fff8f5);
+  border-color: var(--rose);
+}
+[data-theme="dark"] .pl-item.playing { background: #3a1520; }
+.pl-icon {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+  transition: background 0.2s;
+}
+.pl-item.playing .pl-icon { background: var(--rose); animation: spin 3s linear infinite; }
+.pl-name { flex:1; font-weight: 700; font-size:0.93rem; }
+.pl-dur  { font-size:0.8rem; color:var(--muted); }
+
+/* ─── GROWTH CHART ─── */
+.growth-tabs {
+  display: flex; gap: 8px; margin-bottom: 16px;
+}
+.g-tab {
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-weight: 700; font-size:0.85rem;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.2s, color 0.2s;
+}
+.g-tab.active { background: var(--rose); color:#fff; border-color:var(--rose); }
+.growth-chart-wrap { overflow-x: auto; }
+.growth-svg { width:100%; min-width:300px; }
+.chart-bar-g { cursor: pointer; }
+.chart-bar { transition: opacity 0.2s; }
+.chart-bar:hover { opacity: 0.8; }
+
+/* ─── SHARE ─── */
+.share-grid {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(130px,1fr));
+  gap: 10px;
+}
+.share-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 16px 10px;
+  border-radius: 14px;
+  border: none; cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800; font-size: 0.85rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+.share-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.15); }
+.share-btn span:first-child { font-size: 1.8rem; }
+.sb-wa  { background:#25d366; color:#fff; }
+.sb-cp  { background:var(--rose); color:#fff; }
+.sb-tw  { background:#1da1f2; color:#fff; }
+.sb-fb  { background:#1877f2; color:#fff; }
+.share-toast {
+  text-align:center; margin-top:12px; font-size:0.88rem;
+  font-weight:700; color:var(--rose); min-height:20px;
+}
+
+/* ─── ON THIS DAY ─── */
+.otd-box {
+  background: linear-gradient(135deg,#fff0f4,#f0f4ff);
+  border-radius: 16px; padding: 20px;
+  border: 1.5px solid var(--border);
+  text-align: center;
+}
+[data-theme="dark"] .otd-box { background:#2a1a30; }
+.otd-emoji { font-size: 3rem; margin-bottom:10px; }
+.otd-title { font-family:'Pacifico',cursive; font-size:1.2rem; color:var(--rose); margin-bottom:8px; }
+.otd-text  { font-size:0.95rem; line-height:1.6; color:var(--muted); }
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 520px) {
   .gallery { grid-template-columns: repeat(2, 1fr); }
@@ -699,6 +905,14 @@ footer .heart { color: var(--rose); }
   <div class="loader-hearts">❤️</div>
   <div class="loader-sub">Khushiyon ki duniya mein aapka swagat hai...</div>
   <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div id="lightbox">
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <button class="lb-nav lb-prev" onclick="lbMove(-1)">‹</button>
+  <img id="lbImg" src="" alt="Memory">
+  <button class="lb-nav lb-next" onclick="lbMove(1)">›</button>
 </div>
 
 <!-- FLOATING CONTROLS -->
@@ -772,13 +986,14 @@ footer .heart { color: var(--rose); }
 <div class="section fade-in">
   <div class="card">
     <p class="section-title">🖼️ Memory Gallery</p>
+    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:12px">📌 Photo pe tap karo bada karne ke liye</p>
     <div class="gallery">
-      <div class="gallery-item"><img src="store.jpg"   alt="Memory 1"></div>
-      <div class="gallery-item"><img src="tractor.jpg" alt="Memory 2"></div>
-      <div class="gallery-item"><img src="beach.jpg"   alt="Memory 3"></div>
-      <div class="gallery-item"><img src="suit.jpg"    alt="Memory 4"></div>
-      <div class="gallery-item"><img src="red1.jpg"    alt="Memory 5"></div>
-      <div class="gallery-item"><img src="hero.jpg"    alt="Memory 6"></div>
+      <div class="gallery-item" onclick="openLb(0)"><img src="store.jpg"   alt="Memory 1"></div>
+      <div class="gallery-item" onclick="openLb(1)"><img src="tractor.jpg" alt="Memory 2"></div>
+      <div class="gallery-item" onclick="openLb(2)"><img src="beach.jpg"   alt="Memory 3"></div>
+      <div class="gallery-item" onclick="openLb(3)"><img src="suit.jpg"    alt="Memory 4"></div>
+      <div class="gallery-item" onclick="openLb(4)"><img src="red1.jpg"    alt="Memory 5"></div>
+      <div class="gallery-item" onclick="openLb(5)"><img src="hero.jpg"    alt="Memory 6"></div>
     </div>
   </div>
 </div>
@@ -1064,6 +1279,110 @@ footer .heart { color: var(--rose); }
   </div>
 </div>
 
+<!-- ═══ BIRTHDAY COUNTDOWN ═══ -->
+<div class="section fade-in" id="bdaySection">
+  <div class="card" id="bdayCard">
+    <p class="section-title">🎂 Birthday Countdown</p>
+    <div id="bdayContent"></div>
+  </div>
+</div>
+
+<!-- ═══ DAY / NIGHT ═══ -->
+<div class="section fade-in">
+  <div class="card">
+    <p class="section-title">🌙 Abhi Ka Waqt</p>
+    <div class="daynight-bar" id="dnBar">
+      <span class="dn-icon" id="dnIcon">☀️</span>
+      <div>
+        <div id="dnGreet" style="font-size:1.1rem">Suprabhat!</div>
+        <div id="dnTime" style="font-size:0.85rem;opacity:0.8;margin-top:3px"></div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:0.88rem">Din mein dhoop, raat mein chaand — jaise Hitansh ki muskaan! 😊</p>
+  </div>
+</div>
+
+<!-- ═══ ON THIS DAY ═══ -->
+<div class="section fade-in">
+  <div class="card">
+    <p class="section-title">🗓️ Aaj Ke Din Ki Yaad</p>
+    <div class="otd-box" id="otdBox">
+      <div class="otd-emoji" id="otdEmoji">📅</div>
+      <div class="otd-title" id="otdTitle">Aaj ka din...</div>
+      <div class="otd-text"  id="otdText">Loading...</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PLAYLIST ═══ -->
+<div class="section fade-in">
+  <div class="card">
+    <p class="section-title">🎵 Hitansh Ki Playlist</p>
+    <div class="playlist-wrap" id="playlist">
+      <div class="pl-item" data-src="lullaby.mp3" onclick="playSong(this,0)">
+        <div class="pl-icon">🎵</div>
+        <div class="pl-name">Laal Tamatar 🍅</div>
+        <div class="pl-dur">Favorite</div>
+      </div>
+      <div class="pl-item" data-src="lullaby.mp3" onclick="playSong(this,1)">
+        <div class="pl-icon">🎶</div>
+        <div class="pl-name">Kalu Madari 🙉</div>
+        <div class="pl-dur">Favorite</div>
+      </div>
+      <div class="pl-item" data-src="lullaby.mp3" onclick="playSong(this,2)">
+        <div class="pl-icon">🎼</div>
+        <div class="pl-name">Lullaby ❤️</div>
+        <div class="pl-dur">Sone Ka Gaana</div>
+      </div>
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted);margin-top:12px;text-align:center">💡 Apne songs ke naam baad mein update kar sakte ho</p>
+  </div>
+</div>
+
+<!-- ═══ GROWTH CHART ═══ -->
+<div class="section fade-in">
+  <div class="card">
+    <p class="section-title">📊 Growth Chart</p>
+    <div class="growth-tabs">
+      <button class="g-tab active" onclick="showGrowth('weight',this)">⚖️ Weight (kg)</button>
+      <button class="g-tab" onclick="showGrowth('height',this)">📏 Height (cm)</button>
+    </div>
+    <div class="growth-chart-wrap">
+      <svg class="growth-svg" id="growthSvg" viewBox="0 0 340 180"></svg>
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted);margin-top:10px;text-align:center">Approximate data — update karo jab doctor se check ho ✏️</p>
+  </div>
+</div>
+
+<!-- ═══ GUESTBOOK ═══ -->
+<div class="section fade-in">
+  <div class="card">
+    <p class="section-title">📝 Guestbook — Family Ke Messages</p>
+    <div class="gb-form">
+      <input class="gb-input" id="gbName" placeholder="Aapka naam (e.g. Dadi, Chacha) 👤" maxlength="40">
+      <textarea class="gb-input" id="gbMsg" placeholder="Hitansh ke liye kuch likhein... 💕" rows="3" maxlength="200" style="resize:none"></textarea>
+      <button class="gb-btn" onclick="addGbEntry()">💌 Message Bhejo</button>
+    </div>
+    <div class="gb-entries" id="gbEntries">
+      <div class="gb-empty">Abhi koi message nahi hai. Pehle likhne wale ban jao! 🥰</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SHARE ═══ -->
+<div class="section fade-in">
+  <div class="card">
+    <p class="section-title">🔗 Share Karo Hitansh Ki Duniya</p>
+    <div class="share-grid">
+      <button class="share-btn sb-wa" onclick="shareWA()"><span>📱</span><span>WhatsApp</span></button>
+      <button class="share-btn sb-tw" onclick="shareTW()"><span>🐦</span><span>Twitter/X</span></button>
+      <button class="share-btn sb-fb" onclick="shareFB()"><span>👥</span><span>Facebook</span></button>
+      <button class="share-btn sb-cp" onclick="copyLink()"><span>🔗</span><span>Link Copy</span></button>
+    </div>
+    <div class="share-toast" id="shareToast"></div>
+  </div>
+</div>
+
 <!-- ═══ SOCIAL ═══ -->
 <div class="section fade-in">
   <div class="card">
@@ -1280,7 +1599,7 @@ function showMemory() {
   const el = document.getElementById('memResult');
   el.textContent = memories[Math.floor(Math.random() * memories.length)];
   el.classList.remove('show');
-  void el.offsetWidth; // reflow to restart animation
+  void el.offsetWidth;
   el.classList.add('show');
 }
 
@@ -1288,8 +1607,205 @@ function showMemory() {
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
-
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+/* ── Lightbox ── */
+const lbPhotos = ['store.jpg','tractor.jpg','beach.jpg','suit.jpg','red1.jpg','hero.jpg'];
+let lbCur = 0;
+function openLb(i) {
+  lbCur = i;
+  document.getElementById('lbImg').src = lbPhotos[lbCur];
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lbMove(dir) {
+  lbCur = (lbCur + dir + lbPhotos.length) % lbPhotos.length;
+  const img = document.getElementById('lbImg');
+  img.style.transition = 'opacity 0.15s';
+  img.style.opacity = '0';
+  setTimeout(() => { img.src = lbPhotos[lbCur]; img.style.opacity = '1'; }, 160);
+}
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLb();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowRight') lbMove(1);
+  if (e.key === 'ArrowLeft')  lbMove(-1);
+});
+
+/* ── Birthday Countdown ── */
+(function() {
+  const now  = new Date();
+  let next   = new Date(now.getFullYear(), 3, 11);
+  if (now > next) next = new Date(now.getFullYear() + 1, 3, 11);
+  const ms   = next - now;
+  const diffD = Math.floor(ms / 864e5);
+  const diffH = Math.floor((ms % 864e5) / 36e5);
+  const diffM = Math.floor((ms % 36e5) / 6e4);
+  const el = document.getElementById('bdayContent');
+  if (now.getMonth() === 3 && now.getDate() === 11) {
+    el.innerHTML = '<div class="bday-banner"><span class="bday-big">🎉 Happy Birthday Hitansh! 🎂</span>Aaj ka din sabse khaas hai! ❤️<br>Saari family pyaar karti hai! 🥳</div>';
+    launchConfetti();
+  } else {
+    el.innerHTML = `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center">
+      <div class="stat-box"><div class="stat-num">${diffD}</div><div class="stat-label">Din</div></div>
+      <div class="stat-box" style="background:linear-gradient(135deg,#cc5de8,#74c0fc)"><div class="stat-num">${diffH}</div><div class="stat-label">Ghante</div></div>
+      <div class="stat-box" style="background:linear-gradient(135deg,#63e6be,#40c057)"><div class="stat-num">${diffM}</div><div class="stat-label">Minute</div></div>
+    </div><p style="text-align:center;margin-top:14px;color:var(--muted);font-size:0.9rem">🎂 Agla Janamdin — 11 April ${next.getFullYear()}</p>`;
+  }
+})();
+
+function launchConfetti() {
+  const colors = ['#ff6b8a','#ffb347','#cc5de8','#74c0fc','#63e6be'];
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+    c.style.width  = (Math.random() * 8 + 6) + 'px';
+    c.style.height = (Math.random() * 8 + 6) + 'px';
+    c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    c.style.animationDuration = (Math.random() * 2.5 + 1.5) + 's';
+    c.style.animationDelay    = (Math.random() * 2) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5500);
+  }
+}
+
+/* ── Day/Night ── */
+(function dnUpdate() {
+  const h = new Date().getHours();
+  const bar  = document.getElementById('dnBar');
+  const icon = document.getElementById('dnIcon');
+  const greet= document.getElementById('dnGreet');
+  const time = document.getElementById('dnTime');
+  const isDay = h >= 6 && h < 20;
+  bar.className = 'daynight-bar ' + (isDay ? 'day' : 'night');
+  icon.textContent = h < 6 ? '🌙' : h < 12 ? '☀️' : h < 17 ? '🌤️' : h < 20 ? '🌅' : '🌙';
+  const g = h < 6 ? 'Shubh Ratri! Hitansh so gaya kya? 😴'
+          : h < 12 ? 'Suprabhat! Hitansh uth gaya? 😊'
+          : h < 17 ? 'Dopahar — Hitansh khel raha hoga! ☀️'
+          : h < 20 ? 'Sham ho gayi — bahar khelne ka waqt! 🌅'
+          : 'Raat ho gayi — neend aa rahi hai Hitansh ko! 🌙';
+  greet.textContent = g;
+  time.textContent = new Date().toLocaleTimeString('hi-IN',{hour:'2-digit',minute:'2-digit'});
+  setTimeout(dnUpdate, 30000);
+})();
+
+/* ── On This Day ── */
+(function() {
+  const now = new Date();
+  const key = `${now.getMonth()+1}-${now.getDate()}`;
+  const mem = {
+    '4-11': {emoji:'👶',title:'Aaj Hi Hitansh Aaye The!',text:'11 April 2025 ko Hitansh ne duniya mein qadam rakha — aur sabki zindagi badal di. ❤️'},
+    '5-1':  {emoji:'😊',title:'Pehli Muskaan Ka Mahina',text:'May 2025 mein Hitansh ki pehli muskaan thi — ek pal jo hamesha yaad rahega.'},
+    '10-1': {emoji:'🪔',title:'Diwali Wala Mahina',text:'October mein Hitansh ki pehli Diwali thi — roshni aur khushi se bhari!'},
+    '12-25':{emoji:'❄️',title:'Christmas Aur Pehli Sardi',text:'December 2025 mein Hitansh ne pehli baar thandi dekhi!'},
+    '1-1':  {emoji:'🎆',title:'Naya Saal Mubarak!',text:'January mein Hitansh ki pehli Train Journey bhi thi! 🚂'},
+    '11-1': {emoji:'🍚',title:'Annaprashan Ka Mahina',text:'November 2025 mein Annaprashan Ceremony thi — Hitansh ka pehla khana! 🎉'},
+    '2-1':  {emoji:'🚶',title:'Pehla Kadam Ka Mahina',text:'February 2026 mein Hitansh ne pehla kadam rakha! Sab ne khushi manai! 🎊'},
+    '3-1':  {emoji:'🦷',title:'Pehle Dant Ka Mahina',text:'March 2026 mein Hitansh ka pehla dant aaya! 🦷'},
+  }[key] || {emoji:'💕',title:'Aaj Ka Khaas Din',text:'Hitansh ki zindagi ka har din khaas hai. Aaj bhi koi sundar yaad ban rahi hai! ❤️'};
+  document.getElementById('otdEmoji').textContent = mem.emoji;
+  document.getElementById('otdTitle').textContent = mem.title;
+  document.getElementById('otdText').textContent  = mem.text;
+})();
+
+/* ── Playlist ── */
+let curSong = -1;
+function playSong(el, idx) {
+  document.querySelectorAll('.pl-item').forEach(i => i.classList.remove('playing'));
+  const audio = document.getElementById('bg');
+  if (curSong === idx) {
+    audio.pause(); curSong = -1;
+    playing = false;
+    document.getElementById('musicBtn').textContent = '🎵';
+  } else {
+    el.classList.add('playing');
+    curSong = idx;
+    audio.src = el.dataset.src;
+    audio.play().catch(()=>{});
+    playing = true;
+    document.getElementById('musicBtn').textContent = '⏸️';
+  }
+}
+
+/* ── Growth Chart ── */
+const growthData = {
+  weight: { labels:['Apr\'25','Jun\'25','Aug\'25','Oct\'25','Dec\'25','Feb\'26','Apr\'26'], values:[2.9,5.2,7.1,8.4,9.2,9.8,10.3] },
+  height: { labels:['Apr\'25','Jun\'25','Aug\'25','Oct\'25','Dec\'25','Feb\'26','Apr\'26'], values:[50,60,67,72,75,78,81] }
+};
+let curGrowth = 'weight';
+function showGrowth(type, btn) {
+  curGrowth = type;
+  document.querySelectorAll('.g-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  drawGrowth();
+}
+function drawGrowth() {
+  const d = growthData[curGrowth];
+  const svg = document.getElementById('growthSvg');
+  const W=340,H=180,pad=38,barW=26;
+  const max = Math.max(...d.values) * 1.2;
+  const n = d.values.length;
+  const step = (W - pad*2) / (n-1);
+  let pts='', bars='', lbls='', dots='';
+  d.values.forEach((v,i) => {
+    const x = pad + i*step;
+    const y = H - pad - (v/max)*(H - pad*2);
+    pts += x+','+y+' ';
+    bars += `<rect x="${x-barW/2}" y="${y}" width="${barW}" height="${H-pad-y}" fill="url(#gb)" rx="5" opacity="0.2"/>`;
+    lbls += `<text x="${x}" y="${H-5}" text-anchor="middle" font-size="9" fill="#7a5c4e">${d.labels[i]}</text>`;
+    dots += `<circle cx="${x}" cy="${y}" r="5" fill="#ff6b8a"/>`;
+    dots += `<text x="${x}" y="${y-9}" text-anchor="middle" font-size="9" font-weight="bold" fill="#ff6b8a">${v}</text>`;
+  });
+  svg.innerHTML = `<defs><linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6b8a"/><stop offset="100%" stop-color="#ffb347"/></linearGradient></defs>${bars}<polyline points="${pts}" fill="none" stroke="#ff6b8a" stroke-width="2.5" stroke-linejoin="round"/>${dots}${lbls}<text x="8" y="14" font-size="10" font-weight="bold" fill="#7a5c4e">${curGrowth==='weight'?'kg':'cm'}</text>`;
+}
+drawGrowth();
+
+/* ── Guestbook ── */
+const GB_KEY = 'hitansh_guestbook';
+let gbEntries = JSON.parse(localStorage.getItem(GB_KEY) || '[]');
+function renderGb() {
+  const wrap = document.getElementById('gbEntries');
+  if (!gbEntries.length) { wrap.innerHTML='<div class="gb-empty">Abhi koi message nahi. Pehle likhne wale ban jao! 🥰</div>'; return; }
+  wrap.innerHTML = gbEntries.slice().reverse().map(e =>
+    `<div class="gb-entry"><span class="gb-name">${e.name}</span><span class="gb-time"> · ${e.time}</span><div class="gb-msg">${e.msg}</div></div>`
+  ).join('');
+}
+renderGb();
+function addGbEntry() {
+  const name = document.getElementById('gbName').value.trim();
+  const msg  = document.getElementById('gbMsg').value.trim();
+  if (!name || !msg) { alert('Naam aur message dono likhein! 😊'); return; }
+  const now = new Date();
+  gbEntries.push({ name, msg, time: now.toLocaleDateString('hi-IN')+' '+now.toLocaleTimeString('hi-IN',{hour:'2-digit',minute:'2-digit'}) });
+  localStorage.setItem(GB_KEY, JSON.stringify(gbEntries));
+  document.getElementById('gbName').value='';
+  document.getElementById('gbMsg').value='';
+  renderGb();
+}
+
+/* ── Share ── */
+const SITE_URL = window.location.href;
+const SITE_MSG = 'Hitansh ki pyaari duniya dekho! 👶❤️ ' + SITE_URL;
+function shareWA() { window.open('https://wa.me/?text='+encodeURIComponent(SITE_MSG)); }
+function shareTW() { window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(SITE_MSG)); }
+function shareFB() { window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(SITE_URL)); }
+function copyLink() {
+  navigator.clipboard.writeText(SITE_URL).then(() => {
+    const t = document.getElementById('shareToast');
+    t.textContent = '✅ Link copy ho gaya! Paste karo jahan chahein.';
+    setTimeout(() => t.textContent='', 3000);
+  }).catch(() => {
+    document.getElementById('shareToast').textContent = '📋 Manually copy karein: ' + SITE_URL;
+  });
+}
 </script>
 
 </body>
