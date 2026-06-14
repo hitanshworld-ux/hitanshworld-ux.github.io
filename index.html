@@ -504,6 +504,180 @@ footer .heart { color: var(--rose); }
 }
 .fade-in.visible { opacity: 1; transform: none; }
 
+/* ─── LOADING SCREEN ─── */
+#loader {
+  position: fixed; inset: 0;
+  background: linear-gradient(135deg, #ff6b8a, #ffb347, #ff6b8a);
+  background-size: 300% 300%;
+  animation: gradShift 3s ease infinite;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#loader.hide { opacity: 0; visibility: hidden; }
+@keyframes gradShift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+.loader-name {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  color: #fff;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  display: flex; gap: 4px;
+}
+.loader-name span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px) scale(0.8);
+  animation: letterPop 0.5s ease forwards;
+}
+@keyframes letterPop {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.loader-hearts {
+  font-size: 2rem;
+  margin-top: 16px;
+  animation: pulse 1s ease infinite;
+}
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+.loader-sub {
+  color: rgba(255,255,255,0.9);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 10px;
+  animation: fadeUp 0.6s 1.8s ease both;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+.loader-bar-wrap {
+  width: 200px; height: 6px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 6px;
+  margin-top: 28px;
+  overflow: hidden;
+}
+.loader-bar {
+  height: 100%;
+  background: #fff;
+  border-radius: 6px;
+  width: 0%;
+  animation: barFill 2s ease forwards;
+}
+@keyframes barFill { to { width: 100%; } }
+
+/* ─── LOVE COUNTER ─── */
+.love-counter-wrap {
+  text-align: center;
+  padding: 10px 0;
+}
+.love-num {
+  font-family: 'Pacifico', cursive;
+  font-size: 3.5rem;
+  color: var(--rose);
+  line-height: 1;
+  animation: none;
+}
+.love-num.bump {
+  animation: bump 0.35s ease;
+}
+@keyframes bump {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+.love-send-btn {
+  margin-top: 16px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--rose), #ff4d6d);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255,107,138,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.love-send-btn:hover { transform: scale(1.04); }
+.love-send-btn:active { transform: scale(0.97); }
+.love-msg {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  min-height: 22px;
+}
+.heart-burst {
+  position: fixed;
+  pointer-events: none;
+  font-size: 1.8rem;
+  z-index: 9000;
+  animation: flyUp 1.2s ease forwards;
+}
+@keyframes flyUp {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-120px) scale(0.4); }
+}
+
+/* ─── MILESTONES ─── */
+.milestone-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1.5px solid var(--border);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  user-select: none;
+}
+.milestone-item:hover { transform: translateX(4px); }
+.milestone-item.done {
+  background: linear-gradient(135deg, #fff0f8, #fff8f5);
+  border-color: var(--rose);
+}
+[data-theme="dark"] .milestone-item.done { background: #3a1520; }
+.ms-check {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 2.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  transition: background 0.25s, border-color 0.25s;
+  background: var(--card);
+}
+.milestone-item.done .ms-check {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: #fff;
+}
+.ms-emoji { font-size: 1.4rem; flex-shrink: 0; }
+.ms-text  { flex: 1; font-weight: 700; font-size: 0.97rem; }
+.ms-date  { font-size: 0.75rem; color: var(--muted); margin-top: 2px; font-weight: 600; }
+.ms-progress-wrap {
+  background: var(--border);
+  border-radius: 50px;
+  height: 8px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+.ms-progress-bar {
+  height: 100%;
+  background: linear-gradient(135deg, var(--rose), var(--peach));
+  border-radius: 50px;
+  transition: width 0.5s ease;
+}
+.ms-count {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 520px) {
   .gallery { grid-template-columns: repeat(2, 1fr); }
@@ -518,6 +692,14 @@ footer .heart { color: var(--rose); }
 </head>
 
 <body>
+
+<!-- ═══ LOADING SCREEN ═══ -->
+<div id="loader">
+  <div class="loader-name" id="loaderName"></div>
+  <div class="loader-hearts">❤️</div>
+  <div class="loader-sub">Khushiyon ki duniya mein aapka swagat hai...</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
 
 <!-- FLOATING CONTROLS -->
 <div class="fab-group">
@@ -806,6 +988,82 @@ footer .heart { color: var(--rose); }
   </div>
 </div>
 
+<!-- ═══ LOVE COUNTER ═══ -->
+<div class="section fade-in">
+  <div class="card">
+    <p class="section-title">❤️ Hitansh Ko Pyaar Bhejo</p>
+    <div class="love-counter-wrap">
+      <div class="love-num" id="loveNum">0</div>
+      <div style="font-size:0.85rem;color:var(--muted);margin-top:6px">dil Hitansh ke liye ❤️</div>
+      <button class="love-send-btn" onclick="sendLove()">❤️ Pyaar Bhejo</button>
+      <div class="love-msg" id="loveMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MILESTONES ═══ -->
+<div class="section fade-in">
+  <div class="card">
+    <p class="section-title">🏆 Hitansh Ke Milestones</p>
+    <div class="ms-progress-wrap">
+      <div class="ms-progress-bar" id="msBar" style="width:0%"></div>
+    </div>
+    <div class="ms-count" id="msCount">0 / 12 complete</div>
+    <br>
+    <div id="milestoneList">
+      <div class="milestone-item done" data-id="0" onclick="toggleMs(this)">
+        <div class="ms-check">✓</div><div class="ms-emoji">👶</div>
+        <div><div class="ms-text">Duniya Mein Aaya</div><div class="ms-date">11 April 2025</div></div>
+      </div>
+      <div class="milestone-item done" data-id="1" onclick="toggleMs(this)">
+        <div class="ms-check">✓</div><div class="ms-emoji">😊</div>
+        <div><div class="ms-text">Pehli Muskaan</div><div class="ms-date">May 2025</div></div>
+      </div>
+      <div class="milestone-item done" data-id="2" onclick="toggleMs(this)">
+        <div class="ms-check">✓</div><div class="ms-emoji">🚗</div>
+        <div><div class="ms-text">Pehli Family Outing</div><div class="ms-date">June 2025</div></div>
+      </div>
+      <div class="milestone-item done" data-id="3" onclick="toggleMs(this)">
+        <div class="ms-check">✓</div><div class="ms-emoji">🪔</div>
+        <div><div class="ms-text">Pehli Diwali</div><div class="ms-date">October 2025</div></div>
+      </div>
+      <div class="milestone-item done" data-id="4" onclick="toggleMs(this)">
+        <div class="ms-check">✓</div><div class="ms-emoji">🍚</div>
+        <div><div class="ms-text">Annaprashan Ceremony</div><div class="ms-date">November 2025</div></div>
+      </div>
+      <div class="milestone-item done" data-id="5" onclick="toggleMs(this)">
+        <div class="ms-check">✓</div><div class="ms-emoji">🚂</div>
+        <div><div class="ms-text">Pehli Train Journey</div><div class="ms-date">January 2026</div></div>
+      </div>
+      <div class="milestone-item done" data-id="6" onclick="toggleMs(this)">
+        <div class="ms-check">✓</div><div class="ms-emoji">🚶</div>
+        <div><div class="ms-text">Pehla Kadam (Walking!)</div><div class="ms-date">February 2026</div></div>
+      </div>
+      <div class="milestone-item done" data-id="7" onclick="toggleMs(this)">
+        <div class="ms-check">✓</div><div class="ms-emoji">🦷</div>
+        <div><div class="ms-text">Pehla Dant</div><div class="ms-date">March 2026</div></div>
+      </div>
+      <div class="milestone-item done" data-id="8" onclick="toggleMs(this)">
+        <div class="ms-check">✓</div><div class="ms-emoji">🎂</div>
+        <div><div class="ms-text">Pehla Janamdin!</div><div class="ms-date">April 2026</div></div>
+      </div>
+      <div class="milestone-item" data-id="9" onclick="toggleMs(this)">
+        <div class="ms-check"></div><div class="ms-emoji">🗣️</div>
+        <div><div class="ms-text">Pehla Shabd (First Word)</div><div class="ms-date">Coming soon...</div></div>
+      </div>
+      <div class="milestone-item" data-id="10" onclick="toggleMs(this)">
+        <div class="ms-check"></div><div class="ms-emoji">🏃</div>
+        <div><div class="ms-text">Running!</div><div class="ms-date">Coming soon...</div></div>
+      </div>
+      <div class="milestone-item" data-id="11" onclick="toggleMs(this)">
+        <div class="ms-check"></div><div class="ms-emoji">🏫</div>
+        <div><div class="ms-text">School Ki Shuruat</div><div class="ms-date">Coming soon...</div></div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:14px;font-size:0.82rem;color:var(--muted)">Tap karke milestones tick/untick karo 👆</p>
+  </div>
+</div>
+
 <!-- ═══ SOCIAL ═══ -->
 <div class="section fade-in">
   <div class="card">
@@ -844,7 +1102,94 @@ footer .heart { color: var(--rose); }
 
 <!-- ═══ SCRIPTS ═══ -->
 <script>
-/* ── Theme ── */
+/* ── Loading Screen ── */
+(function() {
+  const name = 'Hitansh';
+  const wrap = document.getElementById('loaderName');
+  name.split('').forEach((ch, i) => {
+    const s = document.createElement('span');
+    s.textContent = ch;
+    s.style.animationDelay = (i * 0.12) + 's';
+    wrap.appendChild(s);
+  });
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+  }, 2400);
+})();
+
+/* ── Love Counter ── */
+let loveCount = parseInt(localStorage.getItem('hitansh_love') || '0');
+const loveMessages = [
+  'Shukriya! Hitansh ko aapka pyaar mila! 🥰',
+  'Kitna pyaar! Hitansh muskura raha hai 😊',
+  'Aapka dil bahut bada hai ❤️',
+  'Hitansh ka dil bhar gaya 💕',
+  'Wah! Itna saara pyaar! 🌟'
+];
+function renderLove() {
+  document.getElementById('loveNum').textContent = loveCount.toLocaleString('hi-IN');
+}
+renderLove();
+
+function sendLove() {
+  loveCount++;
+  localStorage.setItem('hitansh_love', loveCount);
+  renderLove();
+  const el = document.getElementById('loveNum');
+  el.classList.remove('bump');
+  void el.offsetWidth;
+  el.classList.add('bump');
+  document.getElementById('loveMsg').textContent =
+    loveMessages[Math.floor(Math.random() * loveMessages.length)];
+  // Burst hearts
+  for (let i = 0; i < 6; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart-burst';
+    h.textContent = ['❤️','🧡','💛','💕','💖'][Math.floor(Math.random()*5)];
+    h.style.left  = (Math.random() * 80 + 10) + 'vw';
+    h.style.top   = (Math.random() * 40 + 30) + 'vh';
+    h.style.animationDelay = (i * 0.08) + 's';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 1400);
+  }
+}
+
+/* ── Milestones ── */
+const MS_KEY = 'hitansh_milestones';
+let msState = JSON.parse(localStorage.getItem(MS_KEY) || 'null');
+const total = 12;
+
+// Init from DOM if no saved state
+if (!msState) {
+  msState = {};
+  document.querySelectorAll('.milestone-item').forEach(el => {
+    msState[el.dataset.id] = el.classList.contains('done');
+  });
+}
+
+function renderMs() {
+  let done = 0;
+  document.querySelectorAll('.milestone-item').forEach(el => {
+    const id = el.dataset.id;
+    const isDone = !!msState[id];
+    el.classList.toggle('done', isDone);
+    el.querySelector('.ms-check').textContent = isDone ? '✓' : '';
+    if (isDone) done++;
+  });
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('msBar').style.width = pct + '%';
+  document.getElementById('msCount').textContent = done + ' / ' + total + ' complete 🎉';
+  localStorage.setItem(MS_KEY, JSON.stringify(msState));
+}
+renderMs();
+
+function toggleMs(el) {
+  const id = el.dataset.id;
+  msState[id] = !msState[id];
+  renderMs();
+}
+
+
 function toggleTheme() {
   const t = document.documentElement;
   const dark = t.dataset.theme !== 'dark';
