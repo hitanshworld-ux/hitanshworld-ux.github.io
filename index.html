@@ -1,10 +1,14 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hitansh's World ❤️</title>
-
+<style>
+:root { --bg:#fff8f5; --text:#2d1a10; --card:#ffffff; }
+[data-theme="dark"] { --bg:#1a0f0a; --text:#ffeedd; --card:#2d1710; }
+body { background:var(--bg); color:var(--text); transition:0.35s; }
+</style>
 <style>
 body{
 margin:0;
@@ -94,7 +98,30 @@ transform:scale(1.05);
 </head>
 
 <body>
+<button onclick="toggleTheme()" style="position:fixed;top:18px;right:18px;
+  z-index:999;padding:10px 18px;border-radius:50px;
+  border:none;background:#ff6b6b;color:#fff;
+  font-size:18px;cursor:pointer;">
+  🌙 Mode
+</button>
 
+<audio id="bg" loop src="lullaby.mp3"></audio>
+
+<button onclick="toggleMusic()" style="position:fixed;top:18px;right:110px;
+  z-index:999;padding:10px 18px;border-radius:50px;
+  border:none;background:#ffb347;color:#fff;
+  font-size:18px;cursor:pointer;">🎵</button>
+
+<script>
+  function toggleTheme() {
+    const t = document.documentElement;
+    t.dataset.theme = t.dataset.theme==='dark' ? 'light' : 'dark';
+  }
+  function toggleMusic() {
+    const a = document.getElementById('bg');
+    a.paused ? a.play() : a.pause();
+  }
+</script>
 <div class="hero">
 <div class="hero-content">
 <h1>👶 Hitansh's World</h1>
