@@ -5,7 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hitansh's World ❤️</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+.milestone-card{
+    max-width:450px;
+    margin:30px auto;
+    padding:20px;
+    border-radius:20px;
+    text-align:center;
+    background:#ffffff;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    font-family:Arial,sans-serif;
+}
 
+#countdown{
+    margin-top:15px;
+    font-size:24px;
+    font-weight:bold;
+    color:#ff4081;
+}
+</style>
 <style>
 /* ─── TOKENS ─── */
 :root {
@@ -1807,6 +1825,29 @@ function copyLink() {
   });
 }
 </script>
+<script>
+const targetDate = new Date("July 11, 2026 00:00:00").getTime();
 
+const timer = setInterval(function(){
+
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if(distance <= 0){
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML =
+        "🎉 Happy 15 Months Hitansh! 💙";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+        `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+},1000);
+</script>
 </body>
 </html>
