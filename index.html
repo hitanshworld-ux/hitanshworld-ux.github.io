@@ -967,6 +967,9 @@ footer .heart { color: var(--rose); }
     <a href="milestone.ics" download>
 📅 Add Monthly Reminder
     </a>
+    <button class="memory-btn" onclick="startCelebration()">
+🎉 Celebrate 15 Months
+    </button>
 <!-- MAIN CONTENT -->
 <div class="main-content">
 
@@ -1861,5 +1864,6 @@ const timer = setInterval(function(){
         `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
 },1000);
 </script>
+<script src="celebration.js"></script>
 </body>
 </html>
